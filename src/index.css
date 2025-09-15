@@ -2,39 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* EduPath Advisor Design System - Education & Trust Theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Main Brand Colors - Education & Trust Theme */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
 
+    /* Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Blue for Trust */
+    --primary: 213 94% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 213 85% 85%;
+    --primary-dark: 213 94% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Vibrant Green for Growth */
+    --secondary: 142 76% 36%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 142 50% 85%;
+    --secondary-dark: 142 76% 26%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Teal for Highlights */
+    --accent: 178 78% 57%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 178 45% 85%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Neutral Tones */
+    --muted: 210 25% 95%;
+    --muted-foreground: 215 16% 47%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 25% 90%;
+    --input: 210 25% 90%;
+    --ring: 213 94% 45%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-dark)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 8px 25px -5px hsl(var(--primary) / 0.15);
+    --shadow-strong: 0 20px 40px -10px hsl(var(--primary) / 0.25);
+
+    /* Success & Warning */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 43 96% 15%;
 
     --radius: 0.5rem;
 
