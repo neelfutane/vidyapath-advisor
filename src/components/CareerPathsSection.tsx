@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ChatBot } from "@/components/ChatBot";
 import { BookOpen, Calculator, Palette, Wrench, ArrowRight, Briefcase, GraduationCap, TrendingUp } from "lucide-react";
 
 const careerPaths = [
@@ -9,7 +10,7 @@ const careerPaths = [
     title: "Science Stream",
     description: "Explore the world of discovery and innovation",
     icon: Calculator,
-    color: "bg-primary",
+    color: "#3b82f6",
     subjects: ["Physics", "Chemistry", "Biology", "Mathematics"],
     careers: [
       { name: "Doctor", growth: "High", govt: true },
@@ -25,7 +26,7 @@ const careerPaths = [
     title: "Commerce Stream", 
     description: "Master the world of business and finance",
     icon: TrendingUp,
-    color: "bg-secondary",
+    color: "#10b981",
     subjects: ["Accountancy", "Business Studies", "Economics", "Mathematics"],
     careers: [
       { name: "Chartered Accountant", growth: "High", govt: false },
@@ -41,7 +42,7 @@ const careerPaths = [
     title: "Arts Stream",
     description: "Express creativity and understand society",
     icon: Palette,
-    color: "bg-accent",
+    color: "#f59e0b",
     subjects: ["History", "Political Science", "Psychology", "English"],
     careers: [
       { name: "Civil Services", growth: "Medium", govt: true },
@@ -57,7 +58,7 @@ const careerPaths = [
     title: "Vocational Courses",
     description: "Develop practical skills for immediate employment",
     icon: Wrench,
-    color: "bg-warning",
+    color: "#8b5cf6",
     subjects: ["ITI", "Polytechnic", "Skill Development", "Trade Courses"],
     careers: [
       { name: "Technician", growth: "Medium", govt: true },
@@ -89,7 +90,10 @@ const CareerPathsSection = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className={`p-3 rounded-lg ${path.color} text-white`}>
+                    <div 
+                      className="p-3 rounded-lg text-white"
+                      style={{ backgroundColor: path.color }}
+                    >
                       <path.icon className="h-6 w-6" />
                     </div>
                     <div>
@@ -162,6 +166,8 @@ const CareerPathsSection = () => {
                   <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
+              
+              <ChatBot stream={path.title} streamColor={path.color} />
             </Card>
           ))}
         </div>
