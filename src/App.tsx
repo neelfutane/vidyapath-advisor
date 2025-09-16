@@ -7,6 +7,10 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import ScienceStream from "./pages/ScienceStream";
+import CommerceStream from "./pages/CommerceStream";
+import ArtsStream from "./pages/ArtsStream";
+import VocationalStream from "./pages/VocationalStream";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +24,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/science-stream" element={<ScienceStream />} />
+            <Route path="/commerce-stream" element={<CommerceStream />} />
+            <Route path="/arts-stream" element={<ArtsStream />} />
+            <Route path="/vocational-stream" element={<VocationalStream />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

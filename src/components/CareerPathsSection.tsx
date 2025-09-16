@@ -1,8 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ChatBot } from "@/components/ChatBot";
 import { BookOpen, Calculator, Palette, Wrench, ArrowRight, Briefcase, GraduationCap, TrendingUp } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const careerPaths = [
   {
@@ -72,6 +72,7 @@ const careerPaths = [
 ];
 
 const CareerPathsSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="careers" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -161,13 +162,30 @@ const CareerPathsSection = () => {
                   <p className="text-sm text-foreground">{path.topColleges.join(", ")}</p>
                 </div>
 
-                <Button variant="outline" className="w-full group">
+                <Button 
+                  variant="outline" 
+                  className="w-full group"
+                  onClick={() => {
+                    switch(path.title) {
+                      case 'Science Stream':
+                        navigate('/science-stream');
+                        break;
+                      case 'Commerce Stream':
+                        navigate('/commerce-stream');
+                        break;
+                      case 'Arts Stream':
+                        navigate('/arts-stream');
+                        break;
+                      case 'Vocational Courses':
+                        navigate('/vocational-stream');
+                        break;
+                    }
+                  }}
+                >
                   Learn More About {path.title}
                   <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
-              
-              <ChatBot stream={path.title} streamColor={path.color} />
             </Card>
           ))}
         </div>
