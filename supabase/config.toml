@@ -52,3 +52,6 @@ enable_phone_autoconfirm = false
 enable_signup = true
 double_confirm_changes = true
 enable_confirmations = false
+
+[functions.chat-groq]
+verify_jwt = false

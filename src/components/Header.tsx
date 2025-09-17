@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Menu, User, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "@/components/LanguageSelector";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +15,7 @@ import {
 const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleAuthClick = () => {
     if (user) {
@@ -36,13 +39,14 @@ const Header = () => {
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
-          <a href="#quiz" className="text-foreground hover:text-primary transition-colors">Aptitude Quiz</a>
-          <a href="#careers" className="text-foreground hover:text-primary transition-colors">Career Guide</a>
-          <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
+          <Button variant="ghost" onClick={() => navigate('/')}>{t('nav.home', 'Home')}</Button>
+          <Button variant="ghost" onClick={() => navigate('/course-mapping')}>{t('nav.courseMapping', 'Course Mapping')}</Button>
+          <Button variant="ghost" onClick={() => navigate('/government-colleges')}>{t('nav.colleges', 'Colleges')}</Button>
+          <Button variant="ghost" onClick={() => navigate('/timeline-tracker')}>{t('nav.timeline', 'Timeline')}</Button>
         </nav>
 
         <div className="flex items-center space-x-4">
+          <LanguageSelector />
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -72,7 +76,7 @@ const Header = () => {
             </Button>
           )}
           <Button variant="hero" size="sm" onClick={user ? () => navigate('/dashboard') : () => navigate('/auth')}>
-            {user ? 'Dashboard' : 'Get Started'}
+            {user ? 'Dashboard' : t('common.getStarted', 'Get Started')}
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="h-4 w-4" />

@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import CareerPathsSection from "@/components/CareerPathsSection";
 import QuizSection from "@/components/QuizSection";
 import Footer from "@/components/Footer";
+import ChatBot from "@/components/ChatBot";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         <QuizSection />
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 };
