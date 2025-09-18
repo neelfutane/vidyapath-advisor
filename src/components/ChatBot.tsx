@@ -3,16 +3,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { MessageCircle, Send, X, Bot, User } from 'lucide-react';
+import { MessageCircle, Send, X, Bot, User, Mic, MicOff } from 'lucide-react';
 import { useGroqChat } from '@/hooks/useGroqChat';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '@/integrations/supabase/client';
 
 const ChatBot = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const { messages, isLoading, sendMessage } = useGroqChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const audioChunks = useRef<Blob[]>([]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -30,11 +34,71 @@ const ChatBot = () => {
     setInputValue('');
   };
 
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      
+      audioChunks.current = [];
+      
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunks.current.push(event.data);
+        }
+      };
+      
+      recorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunks.current, { type: 'audio/webm' });
+        await transcribeAudio(audioBlob);
+        stream.getTracks().forEach(track => track.stop());
+      };
+      
+      recorder.start();
+      setMediaRecorder(recorder);
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Error starting recording:', error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder && isRecording) {
+      mediaRecorder.stop();
+      setMediaRecorder(null);
+      setIsRecording(false);
+    }
+  };
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    try {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Audio = reader.result?.toString().split(',')[1];
+        
+        const { data, error } = await supabase.functions.invoke('transcribe-audio', {
+          body: { audio: base64Audio }
+        });
+        
+        if (error) {
+          console.error('Transcription error:', error);
+          return;
+        }
+        
+        if (data?.text) {
+          setInputValue(data.text);
+        }
+      };
+      reader.readAsDataURL(audioBlob);
+    } catch (error) {
+      console.error('Error transcribing audio:', error);
+    }
+  };
+
   if (!isOpen) {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-strong"
+        className="fixed bottom-20 right-6 h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-strong"
         size="icon"
       >
         <MessageCircle className="h-6 w-6" />
@@ -43,7 +107,7 @@ const ChatBot = () => {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-80 h-96 shadow-strong border-primary/20">
+    <Card className="fixed bottom-20 right-6 w-80 h-96 shadow-strong border-primary/20">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-sm">
@@ -127,6 +191,16 @@ const ChatBot = () => {
               className="flex-1 text-sm"
               disabled={isLoading}
             />
+            <Button 
+              type="button"
+              size="icon" 
+              variant="outline"
+              onClick={isRecording ? stopRecording : startRecording}
+              disabled={isLoading}
+              className={isRecording ? 'bg-red-100 hover:bg-red-200' : ''}
+            >
+              {isRecording ? <MicOff className="h-4 w-4 text-red-600" /> : <Mic className="h-4 w-4" />}
+            </Button>
             <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
               <Send className="h-4 w-4" />
             </Button>

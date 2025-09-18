@@ -55,3 +55,6 @@ enable_confirmations = false
 
 [functions.chat-groq]
 verify_jwt = false
+
+[functions.transcribe-audio]
+verify_jwt = false
