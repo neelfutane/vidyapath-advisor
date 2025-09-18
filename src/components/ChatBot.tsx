@@ -70,28 +70,10 @@ const ChatBot = () => {
   };
 
   const transcribeAudio = async (audioBlob: Blob) => {
-    try {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64Audio = reader.result?.toString().split(',')[1];
-        
-        const { data, error } = await supabase.functions.invoke('transcribe-audio', {
-          body: { audio: base64Audio }
-        });
-        
-        if (error) {
-          console.error('Transcription error:', error);
-          return;
-        }
-        
-        if (data?.text) {
-          setInputValue(data.text);
-        }
-      };
-      reader.readAsDataURL(audioBlob);
-    } catch (error) {
-      console.error('Error transcribing audio:', error);
-    }
+    // Demo prototype - simulating voice transcription
+    setTimeout(() => {
+      setInputValue("This is a demo voice input. Voice transcription would appear here.");
+    }, 1000);
   };
 
   if (!isOpen) {
