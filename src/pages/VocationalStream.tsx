@@ -1,9 +1,10 @@
 import React from 'react';
-import { ArrowLeft, BookOpen, Wrench, Users, Award, Clock } from 'lucide-react';
+import { ArrowLeft, BookOpen, Wrench, Users, Award, Clock, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
+import ChatBot from '@/components/ChatBot';
 
 const VocationalStream = () => {
   const navigate = useNavigate();
@@ -98,6 +99,33 @@ const VocationalStream = () => {
             Develop practical skills for immediate employment and career growth
           </p>
         </div>
+
+        {/* YouTube Video Section */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Play className="w-5 h-5 mr-2" />
+              Vocational Training Overview
+            </CardTitle>
+            <CardDescription>
+              Learn about practical skills and career opportunities in vocational training
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-video w-full">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/kfVsfOSbJY0" 
+                title="Vocational Training Overview"
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Information Section */}
@@ -245,6 +273,7 @@ const VocationalStream = () => {
           </div>
         </div>
       </div>
+      <ChatBot />
     </div>
   );
 };
