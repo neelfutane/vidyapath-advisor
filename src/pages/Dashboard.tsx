@@ -11,7 +11,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { GraduationCap, User, Clock, MessageSquare, Plus, Check, X } from 'lucide-react';
+import { GraduationCap, User, Clock, MessageSquare, Plus, Check, X, Home } from 'lucide-react';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 
@@ -179,9 +179,20 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-6">
-        <div className="flex items-center gap-3 mb-2">
-          <GraduationCap className="h-8 w-8 text-primary" />
-          <h1 className="text-2xl font-bold text-foreground">Student Dashboard</h1>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <GraduationCap className="h-8 w-8 text-primary" />
+            <h1 className="text-2xl font-bold text-foreground">Student Dashboard</h1>
+          </div>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2"
+          >
+            <Home className="h-4 w-4" />
+            Home
+          </Button>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="h-12 w-12">
