@@ -209,69 +209,7 @@ const Dashboard = () => {
       </div>
 
       <div className="container mx-auto p-6 space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Quick Actions */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5" />
-                Quick Actions
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h4 className="font-medium text-red-600">Student ID</h4>
-                <Badge variant="outline">{user.id.substring(0, 8)}</Badge>
-              </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-medium text-red-600">Shortcuts</h4>
-                <div className="space-y-1">
-                  <Button variant="ghost" className="w-full justify-start" size="sm">
-                    📚 University Courses
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" size="sm">
-                    📝 Notes & References
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" size="sm">
-                    📞 Contacts
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" size="sm">
-                    ✓ Tasks
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" size="sm">
-                    🔖 Bookmarks
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <h4 className="font-medium text-red-600">To-Do List</h4>
-                <div className="space-y-1">
-                  {reminders.slice(0, 3).map((reminder) => (
-                    <div key={reminder.id} className="flex items-center gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="p-0 h-auto"
-                        onClick={() => toggleReminderComplete(reminder.id, !reminder.is_completed)}
-                      >
-                        {reminder.is_completed ? (
-                          <Check className="h-4 w-4 text-green-600" />
-                        ) : (
-                          <div className="h-4 w-4 border rounded" />
-                        )}
-                      </Button>
-                      <span className={`text-sm ${reminder.is_completed ? 'line-through text-muted-foreground' : ''}`}>
-                        {reminder.title}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Profile Details */}
           <Card>
             <CardHeader>
