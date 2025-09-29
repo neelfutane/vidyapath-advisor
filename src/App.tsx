@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 import ScienceStream from "./pages/ScienceStream";
 import CommerceStream from "./pages/CommerceStream";
 import ArtsStream from "./pages/ArtsStream";
@@ -30,6 +31,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/science-stream" element={<ScienceStream />} />
               <Route path="/commerce-stream" element={<CommerceStream />} />
               <Route path="/arts-stream" element={<ArtsStream />} />

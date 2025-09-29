@@ -14,13 +14,40 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_history: {
+        Row: {
+          created_at: string
+          id: string
+          is_user_message: boolean
+          message: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_user_message: boolean
+          message: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_user_message?: boolean
+          message?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           age: number | null
           city: string | null
           class_level: string | null
+          contact_number: string | null
           created_at: string
+          date_of_birth: string | null
           full_name: string | null
+          hobbies: string[] | null
           id: string
           interests: string[] | null
           preferred_language: string | null
@@ -32,8 +59,11 @@ export type Database = {
           age?: number | null
           city?: string | null
           class_level?: string | null
+          contact_number?: string | null
           created_at?: string
+          date_of_birth?: string | null
           full_name?: string | null
+          hobbies?: string[] | null
           id?: string
           interests?: string[] | null
           preferred_language?: string | null
@@ -45,12 +75,54 @@ export type Database = {
           age?: number | null
           city?: string | null
           class_level?: string | null
+          contact_number?: string | null
           created_at?: string
+          date_of_birth?: string | null
           full_name?: string | null
+          hobbies?: string[] | null
           id?: string
           interests?: string[] | null
           preferred_language?: string | null
           state?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      timeline_reminders: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_completed: boolean
+          reminder_date: string
+          reminder_time: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          reminder_date: string
+          reminder_time?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          reminder_date?: string
+          reminder_time?: string | null
+          title?: string
           updated_at?: string
           user_id?: string
         }
